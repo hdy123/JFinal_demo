@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import model.User;
 
 import com.jfinal.core.Controller;
@@ -29,7 +31,10 @@ public class UserController extends Controller{
 		   renderText("登录失败");
 	}
 	
-	
+	public void findList(){
+		List<User> user = User.userDao.find("select * from user");
+		//renderText();
+	}
 	public void index(){
 		renderText("hahahh");
 	}
