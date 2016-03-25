@@ -13,10 +13,12 @@ public class UserController extends Controller{
 	public void addUser(){
 		User user = getModel(User.class);
 		user.set("password", "123").save();
+		findList();
 	}
 	
-	public void delUser(int id){
-		User.userDao.deleteById(id);
+	public void delUser(){
+		User.userDao.deleteById(getPara("id"));
+		findList();
 	}
 	
 	public void updateUser(int id){
@@ -32,8 +34,10 @@ public class UserController extends Controller{
 	}
 	
 	public void findList(){
-		List<User> user = User.userDao.find("select * from user");
-		//renderText();
+		List<User> user = User.userDao.find("select * from user");	
+		setAttr("user",user);
+		renderJson();
+		this.render("/login/showUser.jsp");
 	}
 	public void index(){
 		renderText("hahahh");

@@ -8,17 +8,25 @@
 <title>显示用户</title>
 </head>
 <body>
- 
+  <a href="/login/addUser.jsp">添加用户</a>
   <table>
     <tr>
-      <th> 姓名 </th><th>性别</th><th>出生年月</th><th>电子邮件</th>
+      <th> 姓名 </th><th>性别</th><th>出生年月</th><th>电子邮件</th><th>操作</th>
     </tr>
 	<c:forEach items="${user}" var="user" varStatus="vs">
 	     <tr>       
 		    <td> ${user.username}</td>
-		     <td> ${user.sex} </td>
+		    <c:choose>
+		      <c:when test="${user.sex == 0 }"> 
+		        <td>男</td>
+		      </c:when>
+		      <c:otherwise>
+		        <td>女</td>
+		      </c:otherwise>
+		    </c:choose>
 		     <td> ${user.birthday}</td> 
 		     <td>${user.email}</td>  
+		     <td><a href="http://localhost/user/delUser?id=${user.id}">删除</a></td>
 		 </tr>
 	</c:forEach>
    </table>
